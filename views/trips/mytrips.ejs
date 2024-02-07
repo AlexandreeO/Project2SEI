@@ -1,0 +1,44 @@
+<!--  all my trips in one place 
+including completed and uncompleted trips-->
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title><%= title %>></title>
+        <link rel="stylesheet" href="/stylesheets/style.css" />
+    </head>
+    <body>
+        <header>
+            <%- include("../partials/nav") %>
+        </header>
+        <h1>My Trips</h1>
+
+        <% if (user && user.trips.length > 0) { %>
+            <ul id="mytripslist">
+                <% user.trips.forEach(trip => { %>
+                    <li>
+                        <h2>
+                            <a href="/mytrips/showtrip/<%= trip._id  %>"><%= trip.name %></a>
+                        </h2>
+                        <p>Start Date: <%= trip.startDate.toLocaleString("tr-TR",{dateStyle :"short"}) %></p>
+                        <p>End Date:  <%= trip.endDate.toLocaleString("tr-TR",{dateStyle :"short"}) %></p>
+                        <% trip.itinerary.forEach((iti,index) => { %> 
+                            <p>
+                                <%= `Location ${index+1}: ${iti.location}` %>
+                                <br><br>
+                                <%= `Spot ${index+1}: ${iti.spot}` %> 
+                            </p>
+                            <% }) %>
+                        <!-- more trip details to be added here (trip schema) -->
+                    </li>
+                <% }) %>
+            </ul> 
+        <% } else { %>
+        <p>
+            No trips yet - you can start planning your trip now by clicking <a href="/mytrips/newtrip">here</a>
+        </p>
+        <% } %>
+    </body>
+</html>

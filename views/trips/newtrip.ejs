@@ -1,0 +1,67 @@
+<!--  add a new trip -->
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title><%= title %></title>
+        <link rel="stylesheet" href="/stylesheets/style.css" />
+    </head>
+    <body>
+        <header><%- include("../partials/nav") %></header>
+        <h1>Add a New Trip</h1>
+        <form action="/mytrips/newtrip" method="POST" id="newTripForm">
+            <label for="Name">Name:</label>
+            <input type="text" id="name" name="name" required />
+
+            <label for="startDate">Start Date:</label>
+            <input type="date" id="startDate" name="startDate" required />
+
+            <label for="endDate">End Date:</label>
+            <input type="date" id="endDate" name="endDate" required />
+
+            <div id="itinerary">
+                <div class="destination">
+                    <label for="location">Location:</label>
+                    <input
+                        type="text"
+                        class="location"
+                        name="location"
+                        required
+                    />
+
+                    <label for="spot">Surf Spot:</label>
+                    <input type="text" class="spot" name="spot" required />
+                </div>
+            </div>
+
+            <button type="button" id="addDestination">Add Destination</button>
+
+            <input type="submit" value="Save Trip" />
+        </form>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const addDestinationButton =
+                    document.getElementById("addDestination");
+                const itineraryContainer = document.getElementById("itinerary");
+
+                addDestinationButton.addEventListener("click", function () {
+                    const destinationDiv = document.createElement("div");
+                    destinationDiv.classList.add("destination");
+
+                    destinationDiv.innerHTML = `
+                        <label for="location">Location:</label>
+                        <input type="text" class="location" name="location[]" required>
+    
+                        <label for="spot">Surf Spot:</label>
+                        <input type="text" class="spot" name="spot[]" required>
+                    `;
+
+                    itineraryContainer.appendChild(destinationDiv);
+                });
+            });
+        </script>
+    </body>
+</html>

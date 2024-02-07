@@ -1,8 +1,143 @@
+/* public/stylesheets/style.css */
+
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 80px;
+}
+
+.logo {
+    width: 120px; 
+}
+
+ul {
+    list-style-type: none;
+    display: flex;
+}
+
+li {
+    margin: 0;
+    vertical-align: middle;
+    gap: 20px; /* Add gap here if needed */
 }
 
 a {
-  color: #00B7FF;
+    text-decoration: none;
+    color: rgb(246, 181, 31);
+    font-weight: bold;
+    font-size: 16px;
+    font-family: "Courier New", Courier, monospace;
+}
+
+#login,
+#logout {
+    padding: 30px;
+}
+
+a:hover {
+    color: rgb(67, 133, 249);
+}
+
+.google-logo {
+    width: 30px;
+    height: 30px;
+    vertical-align: middle;
+    margin-right: 5px;
+}
+
+#mytrips,
+#newtrip {
+    margin-top: 5px;
+    padding-left: 30px;
+}
+
+form {
+    max-width: 400px;
+    margin: 2rem auto;
+    background-color: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+form label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #333;
+}
+
+form input,
+form textarea {
+    width: 100%;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+form button {
+    background-color: rgb(67, 133, 249);
+    color: white;
+    padding: 0.7rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+form button:hover {
+    background-color: rgba(247, 182, 31);
+}
+
+#mytripslist > li {
+    border: solid rgba(247, 182, 31) 2px;
+    border-radius: 20px;
+    /* margin: 30px; */
+    padding: 0 15px 10px 15px;
+}
+
+#mytripslist > li:hover {
+    box-shadow: 0 0 40px 1px rgba(247, 182, 31, 0.954);
+}
+
+#updateTripButtons {
+    display: flex;
+    justify-content:space-between;
+    flex-grow: 1;
+}
+
+#updateTripButtons > button {
+    min-width: 30%;
+}
+
+#deleteButton:hover {
+    background-color: tomato;
+}
+
+h1 {
+    margin: 20px;
+    margin-inline: auto !important;
+    max-width: fit-content;
+}
+
+
+#mytripslist {
+    display: flex;
+    gap: 5%;
+    max-width: 75%;
+    margin: auto;
+    justify-content: center;
+    margin-top: 40px !important;
 }

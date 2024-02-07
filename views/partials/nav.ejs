@@ -1,0 +1,40 @@
+<nav>
+    <div class="logo-container">
+        <!-- Make the logo a link to the home page -->
+        <a href="/">
+            <img src="/images/WavePlannerLogo.png" alt="Logo" class="logo" />
+        </a>
+    </div>
+    <ul>
+        <% if(user) { %>
+        <li id="newtrip">
+            <a href="/mytrips/newtrip">New Trip</a>
+        </li>
+        <li id="mytrips">
+            <a href="/mytrips">My Trips</a>
+        </li>
+        <li>
+            <!-- Log out -->
+            <a id="logout" href="/logout"
+                >Logout
+                <img
+                    src="/images/google-logo.svg"
+                    alt="Google Logo"
+                    class="google-logo"
+            /></a>
+        </li>
+        <% } else { %>
+        <li>
+            <!-- Log in with Google -->
+            <a id="login" href="/auth/google">
+                Login
+                <img
+                    src="/images/google-logo.svg"
+                    alt="Google Logo"
+                    class="google-logo"
+                />
+            </a>
+        </li>
+        <% } %>
+    </ul>
+</nav>
