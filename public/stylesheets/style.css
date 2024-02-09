@@ -32,7 +32,10 @@ li {
     gap: 20px; /* Add gap here if needed */
 }
 
-a {
+a, #deleteTripButton {
+    display: inline;
+    border: none;
+    background: none;
     text-decoration: none;
     color: rgb(246, 181, 31);
     font-weight: bold;
@@ -40,8 +43,17 @@ a {
     font-family: "Courier New", Courier, monospace;
 }
 
-a:hover {
+a:hover, #deleteTripButton:hover {
     color: rgb(67, 133, 249);
+}
+
+#formDelete {
+    display: inline;
+    margin-left: 20px;
+}
+
+#showTripDiv {
+    text-align: center;
 }
 
 .google-logo {
@@ -62,7 +74,7 @@ a:hover {
     font-size: 17px;
 }
 
-form {
+form:not(#formDelete) {
     max-width: 400px;
     margin: 2rem auto;
     background-color: white;
@@ -87,7 +99,7 @@ form textarea {
     border-radius: 4px;
 }
 
-form button, .submit {
+form button:not(#deleteTripButton), .submit:not(#deleteTripButton) {
     background-color: rgb(67, 133, 249);
     color: white;
     padding: 0.7rem;
@@ -97,7 +109,7 @@ form button, .submit {
     font-size: 15px;
 }
 
-form button:hover , .submit:hover {
+form button:hover:not(#deleteTripButton) , .submit:hover:not(#deleteTripButton) {
     background-color: rgba(247, 182, 31);
 }
 

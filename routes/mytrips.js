@@ -8,31 +8,20 @@ const router = express.Router();
 router.get("/", ensureLoggedIn, async (req, res) => {
     try {
         const userId = req.user._id;
-        const user = await User.findById(userId).populate("trips");
-
-        // Extracting trip IDs from the user's trips
-        const tripIds = user.trips.map((trip) => trip._id);
-
-        // Finding all trips with the extracted trip IDs and populating the itinerary field with Surf Spot details
-        const trips = await Trip.find({ _id: { $in: tripIds } }).populate({
-            path: "itinerary",
-            model: SurfSpot, // Specify the SurfSpot model to populate with
-            select: "name location" // Select the fields to populate
+        const user = await User.findById(userId).populate({
+            path: "trips",
+            populate: { path: "itinerary", model: SurfSpot },
         });
 
-        console.log("User:", user);
-        console.log("Trips:", trips);
-
-        res.render("trips/mytrips", { title: "WavePlanner", user, trips });
+        res.render("trips/mytrips", { title: "WavePlanner", user });
     } catch (err) {
         console.error("Error fetching user trips:", err);
         res.status(500).send("Internal Server Error");
     }
 });
 
-
 router.get("/newtrip", ensureLoggedIn, async (req, res) => {
-    const surfSpots = await SurfSpotModel.find({});
+    const surfSpots = await SurfSpot.find({});
     res.render("trips/newtrip", { title: "WavePlanner", surfSpots });
 });
 
@@ -52,6 +41,18 @@ router.post("/newtrip", ensureLoggedIn, async (req, res) => {
         res.redirect("/mytrips");
     } catch (err) {
         console.error("Error adding new trip:", err);
+        res.status(500).send("Internal Server Error");
+    }
+});
+
+// delete a trip by ID
+router.delete("/:id", async (req, res) => {
+    try {
+        const tripId = req.params.id;
+        await Trip.findByIdAndDelete(tripId);
+        res.redirect("/mytrips"); // Redirect to the trips page after deletion
+    } catch (error) {
+        console.error("Error deleting trip:", error);
         res.status(500).send("Internal Server Error");
     }
 });
@@ -81,6 +82,20 @@ router.get("/showtrip/:id", ensureLoggedIn, async (req, res) => {
         });
     } catch (err) {
         console.error("Error fetching trip details:", err);
+        res.status(500).send("Internal Server Error");
+    }
+});
+
+// GET route to render the update form for a specific trip
+router.put("/update/:id", async (req, res) => {
+    try {
+        const trip = await Trip.findById(req.params.id);
+        if (!trip) {
+            return res.status(404).send("Trip not found");
+        }
+        res.render("trips/updateTrip", { title: "WavePlanner", trip }); // Assuming you have a view file named updateTripForm.ejs for the update form
+    } catch (error) {
+        console.error("Error fetching trip for update:", error);
         res.status(500).send("Internal Server Error");
     }
 });

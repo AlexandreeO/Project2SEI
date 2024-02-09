@@ -14,14 +14,16 @@
         <ul id="allSpots">
             <% allSpots.forEach(spot => { %>
             <li>
-                <h2>
-                    <a href="/surfspots/<%= spot._id %>"><%= spot.name %></a>
-                </h2>
+                <h4>
+                    <%= spot.name %>
+                </h4>
                 <p>Name: <%= spot.name %></p>
                 <p>Location: <%= spot.location %></p>
                 <p>Break Type: <%= spot.breakType %></p>
                 <p>Difficulty Level: <%= spot.difficultyLevel %></p>
+                <% if(user) {%>
                 <a href="/surfspots/update/<%= spot._id %>">Update</a>
+                <% } %>
             </li>
             <% }) %>
         </ul>
