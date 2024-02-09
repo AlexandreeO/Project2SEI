@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>WavePlanner</title>
+        <link rel="stylesheet" href="/stylesheets/style.css" />
+    </head>
+    <body>
+        <header><%- include("../partials/nav") %></header>
+        <h1>Surf Spots</h1>
+
+        <% if (allSpots.length > 0) { %>
+        <ul id="allSpots">
+            <% allSpots.forEach(spot => { %>
+            <li>
+                <h2>
+                    <a href="/surfspots/<%= spot._id %>"><%= spot.name %></a>
+                </h2>
+                <p>Name: <%= spot.name %></p>
+                <p>Location: <%= spot.location %></p>
+                <p>Break Type: <%= spot.breakType %></p>
+                <p>Difficulty Level: <%= spot.difficultyLevel %></p>
+                <a href="/surfspots/update/<%= spot._id %>">Update</a>
+            </li>
+            <% }) %>
+        </ul>
+        <% } else { %>
+        <p>No spots available.</p>
+        <% } %>
+    </body>
+</html>

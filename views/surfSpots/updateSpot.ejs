@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+</head>
+<body>
+    <header><%- include("../partials/nav") %></header>
+    <h1>Update Surf Spot</h1>
+    <form action="/surfspots/update/<%= spot._id %>?_method=PUT" method="POST">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" value="<%= spot.name %>" required>
+
+        <label for="location">Location:</label>
+        <input type="text" id="location" name="location" value="<%= spot.location %>" required>
+
+        <label for="breakType">Break Type:</label>
+        <input type="text" id="breakType" name="breakType" value="<%= spot.breakType %>" required>
+
+        <label for="difficultyLevel">Difficulty Level:</label>
+        <input type="text" id="difficultyLevel" name="difficultyLevel" value="<%= spot.difficultyLevel %>" required>
+
+        <input class="submit" type="submit" value="Update Spot">
+    </form>
+</body>
+</html>

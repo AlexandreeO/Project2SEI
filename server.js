@@ -6,6 +6,7 @@ const logger = require("morgan");
 const session = require("express-session");
 const passport = require("./config/passport");
 require("dotenv").config(); // For loading environment variables
+const methodOverride = require('method-override');
 
 // models
 require("./models/Trip");
@@ -16,7 +17,8 @@ const db = require("./config/database");
 //Routes variables
 const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
-const myTripsRouter = require("./routes/trips/mytrips");
+const myTripsRouter = require("./routes/mytrips");
+const surfspotsRouter = require("./routes/surfspots");
 
 const app = express();
 
@@ -29,6 +31,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
+app.use(methodOverride('_method'));
 
 app.use(
     session({
@@ -36,22 +39,23 @@ app.use(
         resave: false,
         saveUninitialized: true,
     })
-);
-
-app.use(passport.initialize());
-app.use(passport.session());
-
-app.use(function (req, res, next) {
-    res.locals.user = req.user;
-    next();
-});
-
-// using routers so server can process routes/pages
-app.use("/", indexRouter);
-app.use("/users", usersRouter);
-app.use("/mytrips", myTripsRouter);
-
-// Google OAuth callback route
+    );
+    
+    app.use(passport.initialize());
+    app.use(passport.session());
+    
+    app.use(function (req, res, next) {
+        res.locals.user = req.user;
+        next();
+    });
+    
+    // using routers so server can process routes/pages
+    app.use("/", indexRouter);
+    app.use("/users", usersRouter);
+    app.use("/mytrips", myTripsRouter);
+    app.use("/surfspots", surfspotsRouter);
+    
+    // Google OAuth callback route
 app.get(
     "/auth/google/callback",
     passport.authenticate("google", { failureRedirect: "/" }),

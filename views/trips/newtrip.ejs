@@ -11,7 +11,13 @@
     <body>
         <header><%- include("../partials/nav") %></header>
         <h1>Add a New Trip</h1>
-        <form action="/mytrips/newtrip" method="POST" id="newTripForm">
+
+        <form
+            action="/mytrips/newtrip"
+            method="POST"
+            id="newTripForm"
+            name="newTripForm"
+        >
             <label for="Name">Name:</label>
             <input type="text" id="name" name="name" required />
 
@@ -23,25 +29,27 @@
 
             <div id="itinerary">
                 <div class="destination">
-                    <label for="location">Location:</label>
-                    <input
-                        type="text"
-                        class="location"
-                        name="location"
-                        required
-                    />
-
-                    <label for="spot">Surf Spot:</label>
-                    <input type="text" class="spot" name="spot" required />
+                    <!-- <label for="spot">Surf Spot:</label>
+                    <input type="text" class="spot" name="spot" required /> -->
+                    <select name="itinerary" multiple>
+                        <option value="">Select a surf spot</option>
+                        <% surfSpots.forEach(spot => { %>
+                        <option value="<%= spot._id %>">
+                            <%= spot.name %>
+                        </option>
+                        <% }) %>
+                    </select>
+                    <a href="/surfspots/createspot">Create a spot</a>
                 </div>
             </div>
 
-            <button type="button" id="addDestination">Add Destination</button>
+            <button type="submit" id="addDestination">Add Destination</button>
 
-            <input type="submit" value="Save Trip" />
+            <input class="submit" type="submit" value="Save Trip" />
         </form>
 
         <script>
+
             document.addEventListener("DOMContentLoaded", function () {
                 const addDestinationButton =
                     document.getElementById("addDestination");

@@ -12,7 +12,7 @@
     </head>
     <body>
         <header><%- include("../partials/nav") %></header>
-        <h1>Trip Details</h1>
+        <h1>Edit Trip Details</h1>
         <form
             action="/mytrips/showtrip/<%= trip._id %>"
             method="POST"
@@ -48,15 +48,6 @@
             <div id="itinerary">
                 <% trip.itinerary.forEach((iti, index) => { %>
                 <div class="destination">
-                    <label for="location">Location:</label>
-                    <input
-                        type="text"
-                        class="location"
-                        name="location"
-                        value="<%= trip.itinerary[index].location %>"
-                        required
-                    />
-
                     <label for="spot">Surf Spot:</label>
                     <input
                         type="text"

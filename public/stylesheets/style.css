@@ -40,26 +40,26 @@ a {
     font-family: "Courier New", Courier, monospace;
 }
 
-#login,
-#logout {
-    padding: 30px;
-}
-
 a:hover {
     color: rgb(67, 133, 249);
 }
 
 .google-logo {
-    width: 30px;
-    height: 30px;
+    width: 32px;
+    height: 32px;
     vertical-align: middle;
     margin-right: 5px;
 }
 
 #mytrips,
-#newtrip {
-    margin-top: 5px;
-    padding-left: 30px;
+#newtrip,
+#createspot,
+#login,
+#logout,
+#allspots {
+    /* margin-top: 5px; */
+    padding: 5px 15px 5px 15px;
+    font-size: 17px;
 }
 
 form {
@@ -87,7 +87,7 @@ form textarea {
     border-radius: 4px;
 }
 
-form button {
+form button, .submit {
     background-color: rgb(67, 133, 249);
     color: white;
     padding: 0.7rem;
@@ -97,18 +97,20 @@ form button {
     font-size: 15px;
 }
 
-form button:hover {
+form button:hover , .submit:hover {
     background-color: rgba(247, 182, 31);
 }
 
-#mytripslist > li {
+
+
+#mytripslist > li, #allSpots > li {
     border: solid rgba(247, 182, 31) 2px;
     border-radius: 20px;
     /* margin: 30px; */
     padding: 0 15px 10px 15px;
 }
 
-#mytripslist > li:hover {
+#mytripslist > li:hover, #allSpots > li:hover{
     box-shadow: 0 0 40px 1px rgba(247, 182, 31, 0.954);
 }
 
@@ -133,7 +135,7 @@ h1 {
 }
 
 
-#mytripslist {
+#mytripslist, #allSpots {
     display: flex;
     gap: 5%;
     max-width: 75%;
