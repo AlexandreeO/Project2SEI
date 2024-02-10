@@ -11,6 +11,7 @@
         <link rel="stylesheet" href="/stylesheets/style.css" />
     </head>
     <body>
+        <div class="background-image"></div>
         <header><%- include("../partials/nav") %></header>
         <h1>Update <%= trip.name %></h1>
         <form
@@ -46,16 +47,18 @@
             />
 
             <div id="itinerary">
-                <% trip.itinerary.forEach((iti, index) => { %>
+                    <% trip.itinerary.forEach((spot, index) => { %>
+                    
+                    
                 <div class="destination">
-                    <label for="spot">Surf Spot:</label>
-                    <input
-                        type="text"
-                        class="spot"
-                        name="spot"
-                        value="<%= trip.itinerary[index].spot %>"
-                        required
-                    />
+                    <label for="spot">Spot <%= index + 1 %>: <%= spot.name %></label>
+                    <select name="itinerary" multiple>
+                        <% surfSpots.forEach(spot => { %>
+                        <option value="<%= spot._id %>">
+                            <%= spot.name %>
+                        </option>
+                        <% }) %>
+                    </select>
                 </div>
                 <% }) %>
             </div>
@@ -82,10 +85,8 @@
                     destinationDiv.classList.add("destination");
 
                     destinationDiv.innerHTML = `
-                        <label for="location">Location:</label>
-                        <input type="text" class="location" name="location[]" required>
     
-                        <label for="spot">Surf Spot:</label>
+                        <label for="spot">New Surf Spot :</label>
                         <input type="text" class="spot" name="spot[]" required>
                     `;
 

@@ -5,6 +5,20 @@ body {
     font-family: Arial, sans-serif;
 }
 
+.background-image {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* Ensures the background is behind all other elements */
+    opacity: 0.4; /* Adjust the opacity as needed */
+    background-image: url('/images/backgroundimage.jpeg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
 header {
     background-color: #333;
     color: #fff;
@@ -32,22 +46,22 @@ li {
     gap: 20px; /* Add gap here if needed */
 }
 
-a, #deleteTripButton {
+a, #deleteTripButton, #updateTripButton {
     display: inline;
     border: none;
-    background: none;
+    background: none !important;
     text-decoration: none;
-    color: rgb(246, 181, 31);
+    color: rgb(246, 181, 31) !important;
     font-weight: bold;
     font-size: 16px;
     font-family: "Courier New", Courier, monospace;
 }
 
-a:hover, #deleteTripButton:hover {
-    color: rgb(67, 133, 249);
+a:hover, #deleteTripButton:hover, #updateTripButton:hover {
+    color: rgb(67, 133, 249) !important;
 }
 
-#formDelete {
+#formDelete, #formUpdate {
     display: inline;
     margin-left: 20px;
 }
@@ -74,7 +88,7 @@ a:hover, #deleteTripButton:hover {
     font-size: 17px;
 }
 
-form:not(#formDelete) {
+form:not(#formDelete, #formUpdate) {
     max-width: 400px;
     margin: 2rem auto;
     background-color: white;
@@ -99,7 +113,7 @@ form textarea {
     border-radius: 4px;
 }
 
-form button:not(#deleteTripButton), .submit:not(#deleteTripButton) {
+form button:not(#deleteTripButton, #formUpdate), .submit:not(#deleteTripButton, #formUpdate) {
     background-color: rgb(67, 133, 249);
     color: white;
     padding: 0.7rem;
@@ -109,7 +123,7 @@ form button:not(#deleteTripButton), .submit:not(#deleteTripButton) {
     font-size: 15px;
 }
 
-form button:hover:not(#deleteTripButton) , .submit:hover:not(#deleteTripButton) {
+form button:hover:not(#deleteTripButton, #formUpdate) , .submit:hover:not(#deleteTripButton, #formUpdate) {
     background-color: rgba(247, 182, 31);
 }
 

@@ -11,21 +11,36 @@
         <link rel="stylesheet" href="/stylesheets/style.css" />
     </head>
     <body>
+        <div class="background-image"></div>
         <header><%- include("../partials/nav") %></header>
         <h1>Trip Details</h1>
         <div id="showTripDiv">
             <h2><%= trip.name %></h2>
-            <p>Start Date: <%= trip.startDate %></p>
-            <p>End Date: <%= trip.endDate %></p>
-            <!-- Display other trip details as needed -->
+            <p>
+                Start Date: <%= trip.startDate.toLocaleString("tr-TR",{dateStyle
+                :"short"}) %>
+            </p>
+            <p>End Date: <%= trip.endDate.toLocaleString("tr-TR",{dateStyle
+                :"short"}) %></p>
+                <% trip.itinerary.forEach((spot, index) => { %>
+                    <p>Spot <%= index + 1 %>: <%= spot.name %></p>
+                    <% }) %>
 
-            <!-- Update button -->
-            <a href="/mytrips/update/<%= trip._id %>">Update</a>
-            <form id="formDelete" action="/mytrips/<%= trip._id %>?_method=DELETE" method="POST">
+            <!-- Update and delete button -->
+            <form
+                id="formUpdate"
+                action="/mytrips/<%= trip._id %>?_method=PUT"
+                method="POST"
+            >
+            <button id="updateTripButton" type="submit">Update Trip</button>
+            </form>
+            <form
+                id="formDelete"
+                action="/mytrips/<%= trip._id %>?_method=DELETE"
+                method="POST"
+            >
                 <button id="deleteTripButton" type="submit">Delete Trip</button>
             </form>
         </div>
-
-        
     </body>
 </html>

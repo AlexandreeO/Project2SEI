@@ -87,13 +87,14 @@ router.get("/showtrip/:id", ensureLoggedIn, async (req, res) => {
 });
 
 // GET route to render the update form for a specific trip
-router.put("/update/:id", async (req, res) => {
+router.put("/:id", async (req, res) => {
     try {
         const trip = await Trip.findById(req.params.id);
         if (!trip) {
             return res.status(404).send("Trip not found");
         }
-        res.render("trips/updateTrip", { title: "WavePlanner", trip }); // Assuming you have a view file named updateTripForm.ejs for the update form
+        const surfSpots = await SurfSpot.find({});
+        res.render("trips/updateTrip", { title: "WavePlanner", trip, surfSpots }); // Assuming you have a view file named updateTripForm.ejs for the update form
     } catch (error) {
         console.error("Error fetching trip for update:", error);
         res.status(500).send("Internal Server Error");
